@@ -56,21 +56,21 @@ class ToDoListCell: UITableViewCell {
         self.completedImage.snp.makeConstraints { make in
             make.top.equalTo(stackView.snp.top).offset(10)
             make.trailing.equalTo(stackView.snp.trailing).offset(-20)
-            make.bottom.equalTo(stackView.snp.bottom).offset(-10)
-            make.width.equalTo(50)
+            make.width.height.equalTo(30)
         }
         
         self.title.snp.makeConstraints { make in
             make.top.equalTo(stackView.snp.top).offset(10)
             make.leading.equalTo(stackView.snp.leading).offset(20)
-            make.trailing.equalTo(completedImage.snp.trailing).offset(-10)
+            make.trailing.equalTo(completedImage.snp.leading).offset(-10)
             make.height.equalTo(30)
         }
         
         self.descriptionData.snp.makeConstraints { make in
             make.top.equalTo(title.snp.bottom).offset(5)
             make.bottom.equalTo(stackView.snp.bottom).offset(-10)
-            make.leading.trailing.equalTo(title)
+            make.leading.equalTo(title)
+            make.trailing.equalTo(completedImage)
         }
     }
     
