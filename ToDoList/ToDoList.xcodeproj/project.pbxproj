@@ -18,6 +18,7 @@
 		734854FC2AFD09A20044490F /* NotoSansKR-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 734854FA2AFD09A20044490F /* NotoSansKR-Regular.ttf */; };
 		734854FD2AFD09A20044490F /* NotoSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 734854FB2AFD09A20044490F /* NotoSansKR-Bold.ttf */; };
 		734855002AFD18060044490F /* ToDoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734854FF2AFD18060044490F /* ToDoListCell.swift */; };
+		734855022AFD257E0044490F /* ToDoListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734855012AFD257E0044490F /* ToDoListModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		734854FA2AFD09A20044490F /* NotoSansKR-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.ttf"; sourceTree = "<group>"; };
 		734854FB2AFD09A20044490F /* NotoSansKR-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.ttf"; sourceTree = "<group>"; };
 		734854FF2AFD18060044490F /* ToDoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCell.swift; sourceTree = "<group>"; };
+		734855012AFD257E0044490F /* ToDoListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		734854ED2AFD04AD0044490F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				734855012AFD257E0044490F /* ToDoListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				734854F12AFD058D0044490F /* ToDoListView.swift in Sources */,
 				734854DA2AFD044F0044490F /* AppDelegate.swift in Sources */,
 				734854DC2AFD044F0044490F /* SceneDelegate.swift in Sources */,
+				734855022AFD257E0044490F /* ToDoListModel.swift in Sources */,
 				734855002AFD18060044490F /* ToDoListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
