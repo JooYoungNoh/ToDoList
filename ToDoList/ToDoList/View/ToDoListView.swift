@@ -11,8 +11,17 @@ class ToDoListView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.setView()
+    }
+    
+    func setView() {
+        //메인 뷰
+        self.view.backgroundColor = .systemBackground
+        
+        //네비게이션 뷰
+        self.navigationItem.title = "ToDoList"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
     }
     
 
