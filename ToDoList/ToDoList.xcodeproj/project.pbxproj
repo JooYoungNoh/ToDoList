@@ -17,6 +17,7 @@
 		734854F82AFD09180044490F /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 734854F72AFD09180044490F /* sample.json */; };
 		734854FC2AFD09A20044490F /* NotoSansKR-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 734854FA2AFD09A20044490F /* NotoSansKR-Regular.ttf */; };
 		734854FD2AFD09A20044490F /* NotoSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 734854FB2AFD09A20044490F /* NotoSansKR-Bold.ttf */; };
+		734855002AFD18060044490F /* ToDoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734854FF2AFD18060044490F /* ToDoListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		734854F72AFD09180044490F /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		734854FA2AFD09A20044490F /* NotoSansKR-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.ttf"; sourceTree = "<group>"; };
 		734854FB2AFD09A20044490F /* NotoSansKR-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.ttf"; sourceTree = "<group>"; };
+		734854FF2AFD18060044490F /* ToDoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				734854D92AFD044F0044490F /* AppDelegate.swift */,
 				734854DB2AFD044F0044490F /* SceneDelegate.swift */,
 				734854EF2AFD04D30044490F /* View */,
+				734854FE2AFD17E60044490F /* Cell */,
 				734854EE2AFD04BA0044490F /* ViewModel */,
 				734854ED2AFD04AD0044490F /* Model */,
 				734854E72AFD04510044490F /* Info.plist */,
@@ -107,6 +110,14 @@
 				734854FA2AFD09A20044490F /* NotoSansKR-Regular.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		734854FE2AFD17E60044490F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				734854FF2AFD18060044490F /* ToDoListCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +203,7 @@
 				734854F12AFD058D0044490F /* ToDoListView.swift in Sources */,
 				734854DA2AFD044F0044490F /* AppDelegate.swift in Sources */,
 				734854DC2AFD044F0044490F /* SceneDelegate.swift in Sources */,
+				734855002AFD18060044490F /* ToDoListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
