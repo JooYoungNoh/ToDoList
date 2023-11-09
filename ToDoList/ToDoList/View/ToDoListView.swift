@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class ToDoListView: UIViewController {
+    
+    var vm: ToDoListVM = ToDoListVM()
 
     let tableView = UITableView()
     
@@ -19,6 +21,11 @@ class ToDoListView: UIViewController {
         self.tableView.register(ToDoListCell.self, forCellReuseIdentifier: ToDoListCell.identifier)
         
         self.setView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        vm.toDoList = vm.dataPasing("sample.json")
     }
     
     func setView() {
@@ -43,15 +50,18 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.identifier, for: indexPath) as? ToDoListCell else { return UITableViewCell() }
         
-        cell.title.text = "실험중"
-        cell.descriptionData.text = "아아아아아ㅏ앙아앙아앙아아아아앙"
+        cell.title.text = self.vm.toDoList[indexPath.row].title
+        cell.descriptionData.text = self.vm.toDoList[indexPath.row].description
+        if self.vm.toDoList[indexPath.row].completed {
+            cell.completedImage.isHidden = false
+        }
         cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.vm.toDoList.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

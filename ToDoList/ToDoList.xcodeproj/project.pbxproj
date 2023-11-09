@@ -19,6 +19,7 @@
 		734854FD2AFD09A20044490F /* NotoSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 734854FB2AFD09A20044490F /* NotoSansKR-Bold.ttf */; };
 		734855002AFD18060044490F /* ToDoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734854FF2AFD18060044490F /* ToDoListCell.swift */; };
 		734855022AFD257E0044490F /* ToDoListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734855012AFD257E0044490F /* ToDoListModel.swift */; };
+		734855042AFD25EF0044490F /* ToDoListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734855032AFD25EF0044490F /* ToDoListVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		734854FB2AFD09A20044490F /* NotoSansKR-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.ttf"; sourceTree = "<group>"; };
 		734854FF2AFD18060044490F /* ToDoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListCell.swift; sourceTree = "<group>"; };
 		734855012AFD257E0044490F /* ToDoListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListModel.swift; sourceTree = "<group>"; };
+		734855032AFD25EF0044490F /* ToDoListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		734854EE2AFD04BA0044490F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				734855032AFD25EF0044490F /* ToDoListVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			files = (
 				734854F12AFD058D0044490F /* ToDoListView.swift in Sources */,
 				734854DA2AFD044F0044490F /* AppDelegate.swift in Sources */,
+				734855042AFD25EF0044490F /* ToDoListVM.swift in Sources */,
 				734854DC2AFD044F0044490F /* SceneDelegate.swift in Sources */,
 				734855022AFD257E0044490F /* ToDoListModel.swift in Sources */,
 				734855002AFD18060044490F /* ToDoListCell.swift in Sources */,
