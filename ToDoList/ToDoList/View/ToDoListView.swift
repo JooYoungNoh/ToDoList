@@ -72,8 +72,11 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! ToDoListCell
         if cell.completedImage.isHidden {
             cell.completedImage.isHidden = false
+            self.vm.toDoList[indexPath.row].completed = true
         } else {
             cell.completedImage.isHidden = true
+            self.vm.toDoList[indexPath.row].completed = false
         }
+        print(self.vm.toDoList[indexPath.row])
     }
 }
