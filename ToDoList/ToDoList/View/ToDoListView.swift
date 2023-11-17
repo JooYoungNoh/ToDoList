@@ -25,7 +25,7 @@ class ToDoListView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        vm.toDoList = vm.dataPasing("sample.json")
+        vm.dataPasing("sample.json")
     }
     
     func setView() {
@@ -42,7 +42,6 @@ class ToDoListView: UIViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
 }
 
@@ -52,11 +51,11 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
         
         cell.title.text = self.vm.toDoList[indexPath.row].title
         cell.descriptionData.text = self.vm.toDoList[indexPath.row].description
+        cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
+        
         if self.vm.toDoList[indexPath.row].completed {
             cell.completedImage.isHidden = false
         }
-        cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
-        
         return cell
     }
     
@@ -69,7 +68,7 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! ToDoListCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ToDoListCell else { return }
         if cell.completedImage.isHidden {
             cell.completedImage.isHidden = false
             self.vm.toDoList[indexPath.row].completed = true
@@ -77,6 +76,5 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
             cell.completedImage.isHidden = true
             self.vm.toDoList[indexPath.row].completed = false
         }
-        print(self.vm.toDoList[indexPath.row])
     }
 }
