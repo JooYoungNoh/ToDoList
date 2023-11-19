@@ -35,6 +35,7 @@ class ToDoListView: UIViewController {
         //네비게이션 뷰
         self.navigationItem.title = "ToDoList"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(AddButtonClick(_:)))
         
         //테이블 뷰
         self.view.addSubview(self.tableView)
@@ -45,6 +46,19 @@ class ToDoListView: UIViewController {
     }
 }
 
+//MARK: 액션 메소드
+extension ToDoListView {
+    @objc func AddButtonClick(_ sender: UIBarButtonItem) {
+        let addView = AddToDoListView()
+        
+        addView.modalPresentationStyle = .overFullScreen
+        addView.modalTransitionStyle = .crossDissolve
+        
+        self.present(addView, animated: true)
+    }
+}
+
+//MARK: 테이블 뷰 메소드
 extension ToDoListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.identifier, for: indexPath) as? ToDoListCell else { return UITableViewCell() }
