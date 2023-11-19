@@ -9,6 +9,9 @@ import UIKit
 
 class AddToDoListView: UIViewController {
     
+    var vm: ToDoListVM?
+    var tableView: UITableView?
+    
     let alertView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -96,6 +99,20 @@ extension AddToDoListView {
     }
 }
 
+//MARK: 버튼 메소드
+extension AddToDoListView {
+    @objc func addToDoData(_ sender: UIButton) {
+        if titleTextView.text != "" && descriptionTextView.text != "" {
+            vm?.addToDo(title: titleTextView.text, description: descriptionTextView.text)
+            
+            self.tableView?.reloadData()
+            self.dismiss(animated: true)
+        } else {
+            
+        }
+    }
+}
+
 //MARK: 화면 구현 부분
 extension AddToDoListView {
     func setView() {
@@ -123,6 +140,7 @@ extension AddToDoListView {
         
         //취소, 추가 버튼
         self.cancelButton.addTarget(self, action: #selector(backView(_:)), for: .touchUpInside)
+        self.addButton.addTarget(self, action: #selector(addToDoData(_:)), for: .touchUpInside)
         
         self.alertView.addSubview(self.cancelButton)
         self.alertView.addSubview(self.addButton)

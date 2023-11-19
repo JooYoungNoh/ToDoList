@@ -28,6 +28,9 @@ class ToDoListVM {
         } catch {
             fatalError("Unable to parse \(fileName): \(error)")
         }
-        
+    }
+    
+    func addToDo(title: String, description: String) {
+        self.toDoList.append(ToDoListModel.init(id: self.toDoList.count, title: title, description: description, completed: false))
     }
 }

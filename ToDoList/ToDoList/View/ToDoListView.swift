@@ -38,6 +38,7 @@ class ToDoListView: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(AddButtonClick(_:)))
         
         //테이블 뷰
+        self.tableView.separatorStyle = .none
         self.view.addSubview(self.tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
@@ -53,6 +54,9 @@ extension ToDoListView {
         
         addView.modalPresentationStyle = .overFullScreen
         addView.modalTransitionStyle = .crossDissolve
+        
+        addView.vm = self.vm
+        addView.tableView = self.tableView
         
         self.present(addView, animated: true)
     }

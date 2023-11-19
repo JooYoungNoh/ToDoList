@@ -83,7 +83,7 @@ class ToDoListCell: UITableViewCell {
         
         self.title.text = ""
         self.descriptionData.text = ""
-        self.completedImage.image = nil
+        self.completedImage.isHidden = true
     }
     
     override func awakeFromNib() {
