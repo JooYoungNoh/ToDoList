@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import SnapKit
 
 class AddToDoListView: UIViewController {
     
     var vm: ToDoListVM?
     var tableView: UITableView?
+    
+    var keyboardHeightConstTop: Constraint?
+    var keyboardHeightConstBottom: Constraint?
     
     let alertView: UIView = {
         let view = UIView()
@@ -123,9 +127,38 @@ extension AddToDoListView {
     }
 }
 
+//MARK: textView 클릭 시 뷰가 올라가도록
+extension AddToDoListView {
+    func setKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+            
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object:nil)
+            
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                
+            UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
+                self.keyboardHeightConstTop?.update(offset: (50-keyboardFrame.cgRectValue.height))
+                self.keyboardHeightConstBottom?.update(offset: -(keyboardFrame.cgRectValue.height+10))
+            }).startAnimation()
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+            
+        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
+            self.keyboardHeightConstTop?.update(offset: 50)
+            self.keyboardHeightConstBottom?.update(offset: 0)
+        }).startAnimation()
+    }
+}
+
 //MARK: 화면 구현 부분
 extension AddToDoListView {
     func setView() {
+        self.setKeyboardNotification()
         self.uiTapCreate()
         
         //메인 뷰
@@ -198,8 +231,9 @@ extension AddToDoListView {
         //얼럿 뷰
         self.view.addSubview(self.alertView)
         alertView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.snp.centerY).offset(50)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            self.keyboardHeightConstTop = make.top.equalTo(self.view.snp.centerY).offset(50).constraint
+            self.keyboardHeightConstBottom = make.bottom.equalToSuperview().constraint
         }
     }
 }
