@@ -100,7 +100,7 @@ extension AddToDoListView {
     }
     
     @objc func touchView(_ sender: Any){
-        
+        self.alertView.endEditing(true)
     }
     
     func uiTapCreate() {
@@ -138,20 +138,14 @@ extension AddToDoListView {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                
-            UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
-                self.keyboardHeightConstTop?.update(offset: (50-keyboardFrame.cgRectValue.height))
-                self.keyboardHeightConstBottom?.update(offset: -(keyboardFrame.cgRectValue.height+10))
-            }).startAnimation()
+            self.keyboardHeightConstTop?.update(offset: (50-keyboardFrame.cgRectValue.height))
+            self.keyboardHeightConstBottom?.update(offset: -(keyboardFrame.cgRectValue.height+10))
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-            
-        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
-            self.keyboardHeightConstTop?.update(offset: 50)
-            self.keyboardHeightConstBottom?.update(offset: 0)
-        }).startAnimation()
+        self.keyboardHeightConstTop?.update(offset: 50)
+        self.keyboardHeightConstBottom?.update(offset: 0)
     }
 }
 
@@ -217,7 +211,7 @@ extension AddToDoListView {
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(self.titleTextView.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalTo(self.alertView.snp.centerX)
             make.height.equalTo(30)
         }
         
