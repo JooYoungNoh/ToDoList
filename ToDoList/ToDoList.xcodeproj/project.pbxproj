@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7311B8D52B09F6E6005FC541 /* AddToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7311B8D42B09F6E6005FC541 /* AddToDoListView.swift */; };
 		734854DA2AFD044F0044490F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734854D92AFD044F0044490F /* AppDelegate.swift */; };
 		734854DC2AFD044F0044490F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734854DB2AFD044F0044490F /* SceneDelegate.swift */; };
 		734854E32AFD04510044490F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 734854E22AFD04510044490F /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7311B8D42B09F6E6005FC541 /* AddToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoListView.swift; sourceTree = "<group>"; };
 		734854D62AFD044F0044490F /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		734854D92AFD044F0044490F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		734854DB2AFD044F0044490F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				734854F02AFD058D0044490F /* ToDoListView.swift */,
+				7311B8D42B09F6E6005FC541 /* AddToDoListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				734854F12AFD058D0044490F /* ToDoListView.swift in Sources */,
+				7311B8D52B09F6E6005FC541 /* AddToDoListView.swift in Sources */,
 				734854DA2AFD044F0044490F /* AppDelegate.swift in Sources */,
 				734855042AFD25EF0044490F /* ToDoListVM.swift in Sources */,
 				734854DC2AFD044F0044490F /* SceneDelegate.swift in Sources */,
