@@ -45,7 +45,7 @@ class ToDoListView: UIViewController {
     }
 }
 
-extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
+extension ToDoListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.identifier, for: indexPath) as? ToDoListCell else { return UITableViewCell() }
         
@@ -66,7 +66,9 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+}
+
+extension ToDoListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? ToDoListCell else { return }
         if cell.completedImage.isHidden {
@@ -75,6 +77,13 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
         } else {
             cell.completedImage.isHidden = true
             self.vm.toDoList[indexPath.row].completed = false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.vm.toDoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }
