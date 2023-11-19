@@ -35,6 +35,16 @@ class AddToDoListView: UIViewController {
         return textView
     }()
     
+    let warningLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Blank found"
+        label.textColor = .red
+        label.font = UIFont(name: "NotoSansKR-Bold", size: 20)
+        label.textAlignment = .right
+        label.isHidden = true
+        return label
+    }()
+    
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Description"
@@ -108,7 +118,7 @@ extension AddToDoListView {
             self.tableView?.reloadData()
             self.dismiss(animated: true)
         } else {
-            
+            self.warningLabel.isHidden = false
         }
     }
 }
@@ -124,17 +134,25 @@ extension AddToDoListView {
         //타이틀 부분
         self.alertView.addSubview(self.titleLabel)
         self.alertView.addSubview(self.titleTextView)
+        self.alertView.addSubview(self.warningLabel)
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalTo(self.alertView.snp.centerX).offset(-30)
             make.height.equalTo(30)
+        }
+        
+        warningLabel.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self.titleLabel)
+            make.leading.equalTo(self.titleLabel.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().offset(-20)
         }
         
         titleTextView.snp.makeConstraints { make in
             make.top.equalTo(self.titleLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(self.titleLabel)
+            make.leading.equalTo(self.titleLabel)
+            make.trailing.equalTo(self.warningLabel)
             make.height.equalTo(30)
         }
         
