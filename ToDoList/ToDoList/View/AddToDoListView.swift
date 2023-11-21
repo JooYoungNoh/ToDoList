@@ -119,8 +119,7 @@ extension AddToDoListView {
         if titleTextView.text != "" && descriptionTextView.text != "" {
             vm?.addToDo(title: titleTextView.text, description: descriptionTextView.text)
             
-            self.tableView?.reloadData()
-            self.dismiss(animated: true)
+            self.dismiss(animated: true) { self.tableView?.reloadData() }
         } else {
             self.warningLabel.isHidden = false
         }
