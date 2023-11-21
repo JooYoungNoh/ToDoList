@@ -31,6 +31,10 @@ class ToDoListVM {
     }
     
     func addToDo(title: String, description: String) {
-        self.toDoList.append(ToDoListModel.init(id: self.toDoList.count, title: title, description: description, completed: false))
+        if let last = self.toDoList.last {
+            self.toDoList.append(ToDoListModel.init(id: last.id+1, title: title, description: description, completed: false))
+        } else {
+            self.toDoList.append(ToDoListModel.init(id: 0, title: title, description: description, completed: false))
+        }
     }
 }
