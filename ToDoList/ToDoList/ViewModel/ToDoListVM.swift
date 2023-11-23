@@ -10,7 +10,7 @@ import Foundation
 class ToDoListVM {
     var toDoList: [ToDoListModel] = []
     
-    func dataPasing(_ fileName: String) -> [ToDoListModel] {
+    func dataPasing(_ fileName: String) {
         let data: Data
         guard let file = Bundle.main.url(forResource: fileName, withExtension: nil)
         else {
@@ -24,11 +24,17 @@ class ToDoListVM {
         }
         
         do {
-            return try JSONDecoder().decode([ToDoListModel].self, from: data)
+            self.toDoList = try JSONDecoder().decode([ToDoListModel].self, from: data)
         } catch {
-            print("왜")
             fatalError("Unable to parse \(fileName): \(error)")
         }
-        
+    }
+    
+    func addToDo(title: String, description: String) {
+        if let last = self.toDoList.last {
+            self.toDoList.append(ToDoListModel.init(id: last.id+1, title: title, description: description, completed: false))
+        } else {
+            self.toDoList.append(ToDoListModel.init(id: 0, title: title, description: description, completed: false))
+        }
     }
 }

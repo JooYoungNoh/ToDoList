@@ -6,17 +6,18 @@
 //
 
 import UIKit
+import SnapKit
 
 class ToDoListCell: UITableViewCell {
     static let identifier = "ToDoListCell"
     
-    let stackView: UIView = {
+    lazy var stackView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .systemBackground
         return view
     }()
     
-    let title: UILabel = {
+    lazy var title: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "NotoSansKR-Bold", size: 20)
         label.textColor = .black
@@ -25,7 +26,7 @@ class ToDoListCell: UITableViewCell {
         return label
     }()
     
-    let descriptionData: UILabel = {
+    lazy var descriptionData: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "NotoSansKR-Regular", size: 12)
         label.textColor = .black
@@ -34,7 +35,7 @@ class ToDoListCell: UITableViewCell {
         return label
     }()
     
-    let completedImage: UIImageView = {
+    lazy var completedImage: UIImageView = {
         let imageView = UIImageView()
         imageView.isHidden = true
         return imageView
@@ -83,7 +84,7 @@ class ToDoListCell: UITableViewCell {
         
         self.title.text = ""
         self.descriptionData.text = ""
-        self.completedImage.image = nil
+        self.completedImage.isHidden = true
     }
     
     override func awakeFromNib() {

@@ -25,7 +25,7 @@ class ToDoListView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        vm.toDoList = vm.dataPasing("sample.json")
+        vm.dataPasing("sample.json")
     }
     
     func setView() {
@@ -35,28 +35,45 @@ class ToDoListView: UIViewController {
         //네비게이션 뷰
         self.navigationItem.title = "ToDoList"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(AddButtonClick(_:)))
         
         //테이블 뷰
+        self.tableView.separatorStyle = .none
         self.view.addSubview(self.tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
 }
 
-extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
+//MARK: 액션 메소드
+extension ToDoListView {
+    @objc func AddButtonClick(_ sender: UIBarButtonItem) {
+        let addView = AddToDoListView()
+        
+        addView.modalPresentationStyle = .overFullScreen
+        addView.modalTransitionStyle = .crossDissolve
+        
+        addView.vm = self.vm
+        addView.tableView = self.tableView
+        
+        self.present(addView, animated: true)
+    }
+}
+
+//MARK: 테이블 뷰 메소드
+extension ToDoListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.identifier, for: indexPath) as? ToDoListCell else { return UITableViewCell() }
         
         cell.title.text = self.vm.toDoList[indexPath.row].title
         cell.descriptionData.text = self.vm.toDoList[indexPath.row].description
+        cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
+        
         if self.vm.toDoList[indexPath.row].completed {
             cell.completedImage.isHidden = false
         }
-        cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
-        
         return cell
     }
     
@@ -67,9 +84,11 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+}
+
+extension ToDoListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! ToDoListCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ToDoListCell else { return }
         if cell.completedImage.isHidden {
             cell.completedImage.isHidden = false
             self.vm.toDoList[indexPath.row].completed = true
@@ -77,6 +96,12 @@ extension ToDoListView: UITableViewDataSource, UITableViewDelegate {
             cell.completedImage.isHidden = true
             self.vm.toDoList[indexPath.row].completed = false
         }
-        print(self.vm.toDoList[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.vm.toDoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }
