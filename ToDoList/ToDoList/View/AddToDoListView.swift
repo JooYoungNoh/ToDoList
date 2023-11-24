@@ -10,20 +10,21 @@ import SnapKit
 
 class AddToDoListView: UIViewController {
     
+    weak var delegate: UpdateTableViewDelegate?
+    
     var vm: ToDoListVM?
-    var tableView: UITableView?
     
     var keyboardHeightConstTop: Constraint?
     var keyboardHeightConstBottom: Constraint?
     
-    let alertView: UIView = {
+    lazy var alertView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 20
         return view
     }()
     
-    let titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Title"
         label.font = UIFont(name: "NotoSansKR-Bold", size: 20)
@@ -31,7 +32,7 @@ class AddToDoListView: UIViewController {
         return label
     }()
     
-    let titleTextView: UITextView = {
+    lazy var titleTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont(name: "NotoSansKR-Regular", size: 12)
         textView.layer.cornerRadius = 5
@@ -39,7 +40,7 @@ class AddToDoListView: UIViewController {
         return textView
     }()
     
-    let warningLabel: UILabel = {
+    lazy var warningLabel: UILabel = {
         let label = UILabel()
         label.text = "Blank found"
         label.textColor = .red
@@ -49,7 +50,7 @@ class AddToDoListView: UIViewController {
         return label
     }()
     
-    let descriptionLabel: UILabel = {
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Description"
         label.font = UIFont(name: "NotoSansKR-Bold", size: 20)
@@ -57,7 +58,7 @@ class AddToDoListView: UIViewController {
         return label
     }()
     
-    let descriptionTextView: UITextView = {
+    lazy var descriptionTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont(name: "NotoSansKR-Regular", size: 12)
         textView.layer.cornerRadius = 5
@@ -65,7 +66,7 @@ class AddToDoListView: UIViewController {
         return textView
     }()
     
-    let cancelButton: UIButton = {
+    lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(.red, for: .normal)
@@ -75,7 +76,7 @@ class AddToDoListView: UIViewController {
         return button
     }()
     
-    let addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button = UIButton()
         button.setTitle("Add", for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -119,7 +120,8 @@ extension AddToDoListView {
         if titleTextView.text != "" && descriptionTextView.text != "" {
             vm?.addToDo(title: titleTextView.text, description: descriptionTextView.text)
             
-            self.dismiss(animated: true) { self.tableView?.reloadData() }
+            self.delegate?.reloadData()
+            self.dismiss(animated: true)
         } else {
             self.warningLabel.isHidden = false
         }

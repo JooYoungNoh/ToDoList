@@ -12,7 +12,7 @@ class ToDoListView: UIViewController {
     
     var vm: ToDoListVM = ToDoListVM()
 
-    let tableView = UITableView()
+    lazy var tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class ToDoListView: UIViewController {
         //네비게이션 뷰
         self.navigationItem.title = "ToDoList"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(AddButtonClick(_:)))
+        self.navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .add, target: self, action: #selector(AddButtonClick(_:)))
         
         //테이블 뷰
         self.tableView.separatorStyle = .none
@@ -50,15 +50,15 @@ class ToDoListView: UIViewController {
 //MARK: 액션 메소드
 extension ToDoListView {
     @objc func AddButtonClick(_ sender: UIBarButtonItem) {
-        let addView = AddToDoListView()
+        let addViewController = AddToDoListView()
         
-        addView.modalPresentationStyle = .overFullScreen
-        addView.modalTransitionStyle = .crossDissolve
+        addViewController.modalPresentationStyle = .overFullScreen
+        addViewController.modalTransitionStyle = .crossDissolve
         
-        addView.vm = self.vm
-        addView.tableView = self.tableView
+        addViewController.delegate = self
+        addViewController.vm = self.vm
         
-        self.present(addView, animated: true)
+        self.present(addViewController, animated: true)
     }
 }
 
@@ -103,5 +103,12 @@ extension ToDoListView: UITableViewDelegate {
             self.vm.toDoList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+}
+
+//MARK: tableView reloadData Delegate
+extension ToDoListView: UpdateTableViewDelegate {
+    func reloadData() {
+        self.tableView.reloadData()
     }
 }
