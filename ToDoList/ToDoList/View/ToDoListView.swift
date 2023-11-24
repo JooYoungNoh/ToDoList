@@ -35,7 +35,7 @@ class ToDoListView: UIViewController {
         //네비게이션 뷰
         self.navigationItem.title = "ToDoList"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .add, target: self, action: #selector(AddButtonClick(_:)))
+        self.navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .add, target: self, action: #selector(addButtonClick(_:)))
         
         //테이블 뷰
         self.tableView.separatorStyle = .none
@@ -49,7 +49,7 @@ class ToDoListView: UIViewController {
 
 //MARK: 액션 메소드
 extension ToDoListView {
-    @objc func AddButtonClick(_ sender: UIBarButtonItem) {
+    @objc func addButtonClick(_ sender: UIBarButtonItem) {
         let addViewController = AddToDoListView()
         
         addViewController.modalPresentationStyle = .overFullScreen
