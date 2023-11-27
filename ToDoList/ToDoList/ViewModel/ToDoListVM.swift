@@ -20,9 +20,9 @@ class ToDoListVM {
                 print(error.localizedDescription)
             } else {
                 print("SUCCESSFULLY LOAD CORE DATA")
+                self.fetchList()
             }
         }
-        fetchList()
     }
     
     func fetchList() {
