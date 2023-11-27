@@ -23,6 +23,7 @@
 		73EFF3982B1439E8003BE71D /* ToDoListModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73EFF3962B1439E8003BE71D /* ToDoListModel.xcdatamodeld */; };
 		73F5943D2B04FA5E00E001FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F5943C2B04FA5E00E001FD /* LaunchScreen.storyboard */; };
 		73FC1B1E2B14BD59009C3800 /* DetailToDoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC1B1D2B14BD59009C3800 /* DetailToDoListView.swift */; };
+		73FC1B202B14DBB0009C3800 /* DetailToDoListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC1B1F2B14DBB0009C3800 /* DetailToDoListVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		73EFF3972B1439E8003BE71D /* ToDoListModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoListModel.xcdatamodel; sourceTree = "<group>"; };
 		73F5943C2B04FA5E00E001FD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Font/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73FC1B1D2B14BD59009C3800 /* DetailToDoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailToDoListView.swift; sourceTree = "<group>"; };
+		73FC1B1F2B14DBB0009C3800 /* DetailToDoListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailToDoListVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				734855032AFD25EF0044490F /* ToDoListVM.swift */,
+				73FC1B1F2B14DBB0009C3800 /* DetailToDoListVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				73FC1B1E2B14BD59009C3800 /* DetailToDoListView.swift in Sources */,
 				734854F12AFD058D0044490F /* ToDoListView.swift in Sources */,
 				738660B02B105E3300690D9A /* UpdateTableViewDelegate.swift in Sources */,
+				73FC1B202B14DBB0009C3800 /* DetailToDoListVM.swift in Sources */,
 				7311B8D52B09F6E6005FC541 /* AddToDoListView.swift in Sources */,
 				734854DA2AFD044F0044490F /* AppDelegate.swift in Sources */,
 				734855042AFD25EF0044490F /* ToDoListVM.swift in Sources */,
