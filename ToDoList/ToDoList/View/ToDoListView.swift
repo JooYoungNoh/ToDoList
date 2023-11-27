@@ -35,6 +35,7 @@ class ToDoListView: UIViewController {
         //네비게이션 뷰
         self.navigationItem.title = "ToDoList"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .add, target: self, action: #selector(addButtonClick(_:)))
         
         //테이블 뷰
@@ -88,14 +89,11 @@ extension ToDoListView: UITableViewDataSource {
 
 extension ToDoListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? ToDoListCell else { return }
-        if cell.completedImage.isHidden {
-            cell.completedImage.isHidden = false
-            self.vm.toDoList[indexPath.row].completed = true
-        } else {
-            cell.completedImage.isHidden = true
-            self.vm.toDoList[indexPath.row].completed = false
-        }
+        let detailViewController = DetailToDoListView()
+        
+        detailViewController.listItem = self.vm.toDoList[indexPath.row]
+        
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
