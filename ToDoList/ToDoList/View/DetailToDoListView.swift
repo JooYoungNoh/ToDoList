@@ -7,10 +7,15 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 class DetailToDoListView: UIViewController {
     
+    weak var delegate: UpdateTableViewDelegate?
+    var container: NSPersistentContainer?
     var listItem: ToDoListModel?
+    
+    var vm: DetailToDoListVM = DetailToDoListVM()
     
     var isSelectDescriptionTextView: Bool = false
     var keyboardHeightConstTopDes: Constraint?
@@ -89,6 +94,16 @@ extension DetailToDoListView {
     }
 }
 
+//MARK: 버튼 메소드
+extension DetailToDoListView {
+    @objc func saveButtomClick(_ sender: UIButton) {
+        self.vm.updateListItem(container: self.container!, listItem: self.listItem!, title: self.titleTextView.text, description: self.descriptionTextView.text, completed: self.completedSeg.selectedSegmentIndex)
+        
+        self.delegate?.reloadData()
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
 //MARK: textView 클릭 시 뷰가 올라가도록
 extension DetailToDoListView {
     func setKeyboardNotification() {
@@ -152,6 +167,7 @@ extension DetailToDoListView {
         }
         
         //저장 부분
+        self.saveButton.addTarget(self, action: #selector(self.saveButtomClick(_:)), for: .touchUpInside)
         self.view.addSubview(self.saveButton)
         
         saveButton.snp.makeConstraints { make in

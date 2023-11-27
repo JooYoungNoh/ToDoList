@@ -91,6 +91,8 @@ extension ToDoListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DetailToDoListView()
         
+        detailViewController.delegate = self
+        detailViewController.container = self.vm.container
         detailViewController.listItem = self.vm.toDoList[indexPath.row]
         
         self.navigationController?.pushViewController(detailViewController, animated: true)
