@@ -100,7 +100,7 @@ extension ToDoListView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.vm.toDoList.remove(at: indexPath.row)
+            self.vm.deleteListItem(indexRow: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

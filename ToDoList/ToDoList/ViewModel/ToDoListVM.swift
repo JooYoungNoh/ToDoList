@@ -58,4 +58,10 @@ class ToDoListVM {
         
         saveListItem()
     }
+    
+    func deleteListItem(indexRow: Int) {
+        let entity = self.toDoList[indexRow]
+        container.viewContext.delete(entity)
+        saveListItem()
+    }
 }
