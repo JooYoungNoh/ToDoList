@@ -6,35 +6,56 @@
 //
 
 import Foundation
+import CoreData
 
 class ToDoListVM {
+    let container: NSPersistentContainer
+    
     var toDoList: [ToDoListModel] = []
     
-    func dataPasing(_ fileName: String) {
-        let data: Data
-        guard let file = Bundle.main.url(forResource: fileName, withExtension: nil)
-        else {
-            fatalError("\(fileName) not found.")
+    init() {
+        container = NSPersistentContainer(name: "ToDoListModel")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("SUCCESSFULLY LOAD CORE DATA")
+            }
         }
-        
+        fetchList()
+    }
+    
+    func fetchList() {
+        let request = NSFetchRequest<ToDoListModel>(entityName: "ToDoListModel")
         do {
-            data = try Data(contentsOf: file)
+            self.toDoList = try container.viewContext.fetch(request)
         } catch {
-            fatalError("Could not load \(fileName): \(error)")
-        }
-        
-        do {
-            self.toDoList = try JSONDecoder().decode([ToDoListModel].self, from: data)
-        } catch {
-            fatalError("Unable to parse \(fileName): \(error)")
+            print(error.localizedDescription)
         }
     }
     
-    func addToDo(title: String, description: String) {
-        if let last = self.toDoList.last {
-            self.toDoList.append(ToDoListModel.init(id: last.id+1, title: title, description: description, completed: false))
-        } else {
-            self.toDoList.append(ToDoListModel.init(id: 0, title: title, description: description, completed: false))
+    func saveListItem() {
+        do {
+            try container.viewContext.save()
+            fetchList()
+        } catch {
+            print(error.localizedDescription)
         }
+    }
+    
+    func addListItem(title: String, description: String) {
+        let item = ToDoListModel(context: container.viewContext)
+        
+        if let last = self.toDoList.last {
+            item.id = last.id+1
+        } else {
+            item.id = 1
+        }
+        
+        item.title = title
+        item.descriptionToDo = description
+        item.completed = false
+        
+        saveListItem()
     }
 }

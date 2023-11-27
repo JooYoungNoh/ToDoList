@@ -25,7 +25,7 @@ class ToDoListView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        vm.dataPasing("sample.json")
+        vm.fetchList()
     }
     
     func setView() {
@@ -68,7 +68,7 @@ extension ToDoListView: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.identifier, for: indexPath) as? ToDoListCell else { return UITableViewCell() }
         
         cell.title.text = self.vm.toDoList[indexPath.row].title
-        cell.descriptionData.text = self.vm.toDoList[indexPath.row].description
+        cell.descriptionData.text = self.vm.toDoList[indexPath.row].descriptionToDo
         cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
         
         if self.vm.toDoList[indexPath.row].completed {
