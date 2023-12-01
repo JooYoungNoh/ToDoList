@@ -12,7 +12,7 @@ class ToDoListView: UIViewController {
     
     var vm: ToDoListVM = ToDoListVM()
 
-    let tableView = UITableView()
+    lazy var tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class ToDoListView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        vm.dataPasing("sample.json")
+        vm.fetchList()
     }
     
     func setView() {
@@ -35,7 +35,8 @@ class ToDoListView: UIViewController {
         //네비게이션 뷰
         self.navigationItem.title = "ToDoList"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(AddButtonClick(_:)))
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .add, target: self, action: #selector(addButtonClick(_:)))
         
         //테이블 뷰
         self.tableView.separatorStyle = .none
@@ -49,16 +50,16 @@ class ToDoListView: UIViewController {
 
 //MARK: 액션 메소드
 extension ToDoListView {
-    @objc func AddButtonClick(_ sender: UIBarButtonItem) {
-        let addView = AddToDoListView()
+    @objc func addButtonClick(_ sender: UIBarButtonItem) {
+        let addViewController = AddToDoListView()
         
-        addView.modalPresentationStyle = .overFullScreen
-        addView.modalTransitionStyle = .crossDissolve
+        addViewController.modalPresentationStyle = .overFullScreen
+        addViewController.modalTransitionStyle = .crossDissolve
         
-        addView.vm = self.vm
-        addView.tableView = self.tableView
+        addViewController.delegate = self
+        addViewController.vm = self.vm
         
-        self.present(addView, animated: true)
+        self.present(addViewController, animated: true)
     }
 }
 
@@ -68,7 +69,7 @@ extension ToDoListView: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.identifier, for: indexPath) as? ToDoListCell else { return UITableViewCell() }
         
         cell.title.text = self.vm.toDoList[indexPath.row].title
-        cell.descriptionData.text = self.vm.toDoList[indexPath.row].description
+        cell.descriptionData.text = self.vm.toDoList[indexPath.row].descriptionToDo
         cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
         
         if self.vm.toDoList[indexPath.row].completed {
@@ -88,20 +89,26 @@ extension ToDoListView: UITableViewDataSource {
 
 extension ToDoListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? ToDoListCell else { return }
-        if cell.completedImage.isHidden {
-            cell.completedImage.isHidden = false
-            self.vm.toDoList[indexPath.row].completed = true
-        } else {
-            cell.completedImage.isHidden = true
-            self.vm.toDoList[indexPath.row].completed = false
-        }
+        let detailViewController = DetailToDoListView()
+        
+        detailViewController.delegate = self
+        detailViewController.container = self.vm.container
+        detailViewController.listItem = self.vm.toDoList[indexPath.row]
+        
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.vm.toDoList.remove(at: indexPath.row)
+            self.vm.deleteListItem(indexRow: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
+}
+
+//MARK: tableView reloadData Delegate
+extension ToDoListView: UpdateTableViewDelegate {
+    func reloadData() {
+        self.tableView.reloadData()
     }
 }
