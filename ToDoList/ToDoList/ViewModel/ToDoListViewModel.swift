@@ -35,11 +35,13 @@ class ToDoListVM {
     }
     
     func saveListItem() {
-        do {
-            try container.viewContext.save()
-            fetchList()
-        } catch {
-            print(error.localizedDescription)
+        if container.viewContext.hasChanges {
+            do {
+                try container.viewContext.save()
+                fetchList()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     

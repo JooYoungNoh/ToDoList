@@ -11,10 +11,12 @@ import CoreData
 class DetailToDoListVM {
     
     func saveListItem(container: NSPersistentContainer) {
-        do {
-            try container.viewContext.save()
-        } catch {
-            print(error.localizedDescription)
+        if container.viewContext.hasChanges {
+            do {
+                try container.viewContext.save()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
