@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class DetailToDoListVM {
+class DetailToDoListViewModel {
     
     func saveListItem(container: NSPersistentContainer) {
         if container.viewContext.hasChanges {

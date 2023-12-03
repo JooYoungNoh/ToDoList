@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class ToDoListVM {
+class ToDoListViewModel {
     let container: NSPersistentContainer
     
     var toDoList: [ToDoListModel] = []

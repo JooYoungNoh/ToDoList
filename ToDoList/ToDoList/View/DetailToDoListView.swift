@@ -15,7 +15,7 @@ class DetailToDoListView: UIViewController {
     var container: NSPersistentContainer?
     var listItem: ToDoListModel?
     
-    var vm: DetailToDoListVM = DetailToDoListVM()
+    var viewModel: DetailToDoListViewModel = DetailToDoListViewModel()
     
     var isSelectDescriptionTextView: Bool = false
     var keyboardHeightConstTopDes: Constraint?
@@ -97,7 +97,7 @@ extension DetailToDoListView {
 //MARK: 버튼 메소드
 extension DetailToDoListView {
     @objc func saveButtomClick(_ sender: UIButton) {
-        self.vm.updateListItem(container: self.container!, listItem: self.listItem!, title: self.titleTextView.text, description: self.descriptionTextView.text, completed: self.completedSeg.selectedSegmentIndex)
+        self.viewModel.updateListItem(container: self.container!, listItem: self.listItem!, title: self.titleTextView.text, description: self.descriptionTextView.text, completed: self.completedSeg.selectedSegmentIndex)
         
         self.delegate?.reloadData()
         self.navigationController?.popViewController(animated: true)

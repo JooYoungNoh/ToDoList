@@ -12,7 +12,7 @@ class AddToDoListView: UIViewController {
     
     weak var delegate: UpdateTableViewDelegate?
     
-    var vm: ToDoListVM?
+    var viewModel: ToDoListViewModel?
     
     var keyboardHeightConstTop: Constraint?
     var keyboardHeightConstBottom: Constraint?
@@ -118,7 +118,7 @@ extension AddToDoListView {
 extension AddToDoListView {
     @objc func addToDoData(_ sender: UIButton) {
         if titleTextView.text != "" && descriptionTextView.text != "" {
-            self.vm?.addListItem(title: self.titleTextView.text, description: self.descriptionTextView.text)
+            self.viewModel?.addListItem(title: self.titleTextView.text, description: self.descriptionTextView.text)
             self.delegate?.reloadData()
             self.dismiss(animated: true)
         } else {
