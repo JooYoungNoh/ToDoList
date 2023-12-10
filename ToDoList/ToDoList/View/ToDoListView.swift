@@ -10,7 +10,7 @@ import SnapKit
 
 class ToDoListView: UIViewController {
     
-    var vm: ToDoListVM = ToDoListVM()
+    var viewModel: ToDoListViewModel = ToDoListViewModel()
 
     lazy var tableView = UITableView()
     
@@ -25,7 +25,7 @@ class ToDoListView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        vm.fetchList()
+        viewModel.fetchList()
     }
     
     func setView() {
@@ -57,7 +57,7 @@ extension ToDoListView {
         addViewController.modalTransitionStyle = .crossDissolve
         
         addViewController.delegate = self
-        addViewController.vm = self.vm
+        addViewController.viewModel = self.viewModel
         
         self.present(addViewController, animated: true)
     }
@@ -68,18 +68,18 @@ extension ToDoListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ToDoListCell.identifier, for: indexPath) as? ToDoListCell else { return UITableViewCell() }
         
-        cell.title.text = self.vm.toDoList[indexPath.row].title
-        cell.descriptionData.text = self.vm.toDoList[indexPath.row].descriptionToDo
+        cell.title.text = self.viewModel.toDoList[indexPath.row].title
+        cell.descriptionData.text = self.viewModel.toDoList[indexPath.row].descriptionToDo
         cell.completedImage.image = UIImage(systemName: "checkmark.circle.fill")
         
-        if self.vm.toDoList[indexPath.row].completed {
+        if self.viewModel.toDoList[indexPath.row].completed {
             cell.completedImage.isHidden = false
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.vm.toDoList.count
+        return self.viewModel.toDoList.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -92,15 +92,15 @@ extension ToDoListView: UITableViewDelegate {
         let detailViewController = DetailToDoListView()
         
         detailViewController.delegate = self
-        detailViewController.container = self.vm.container
-        detailViewController.listItem = self.vm.toDoList[indexPath.row]
+        detailViewController.container = self.viewModel.container
+        detailViewController.listItem = self.viewModel.toDoList[indexPath.row]
         
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.vm.deleteListItem(indexRow: indexPath.row)
+            self.viewModel.deleteListItem(indexRow: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
